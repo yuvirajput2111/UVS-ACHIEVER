@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UVS ACHIEVER | Better Jobs, Sharper Matches</title>
+  <meta
+    name="description"
+    content="UVS ACHIEVER is a refined mobile-style job platform with focused discovery, saved roles, and local AI-powered matching."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Sora:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-backdrop"></div>
+  <section class="auth-screen" id="auth-screen">
+    <div class="auth-card">
+      <p class="section-kicker">Get started</p>
+      <h1>UVS ACHIEVER</h1>
+      <p class="section-copy">Sign up or log in to apply, save roles, and receive application alerts.</p>
+      <div class="auth-toggle">
+        <button class="text-button active-auth" type="button" id="show-login">Login</button>
+        <button class="text-button" type="button" id="show-signup">Sign Up</button>
+      </div>
+
+      <form class="match-form" id="login-form">
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="login-email" placeholder="you@example.com" required>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="login-password" placeholder="Enter password" required>
+        </label>
+        <button class="primary-button full-width" type="submit">Login</button>
+      </form>
+
+      <form class="match-form" id="signup-form" hidden>
+        <label class="field">
+          <span>Full name</span>
+          <input type="text" id="signup-name" placeholder="Your full name" required>
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="signup-email" placeholder="you@example.com" required>
+        </label>
+        <label class="field">
+          <span>Password</span>
+          <input type="password" id="signup-password" placeholder="Create password" required>
+        </label>
+        <button class="primary-button full-width" type="submit">Create account</button>
+      </form>
+
+      <p class="owner-note" id="auth-status">Choose login or sign up to enter the platform.</p>
+    </div>
+  </section>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="topbar-label">Welcome to</p>
+        <h1>UVS ACHIEVER</h1>
+      </div>
+      <div class="topbar-actions" aria-label="Quick actions">
+        <button class="icon-button" type="button" id="auth-user-button" aria-label="Current user">
+          <span class="icon icon-user"></span>
+        </button>
+        <button class="icon-button subtle" type="button" aria-label="Refresh">
+          <span class="icon icon-refresh"></span>
+        </button>
+        <button class="icon-button" type="button" aria-label="Search">
+          <span class="icon icon-search"></span>
+        </button>
+        <button class="icon-button" type="button" aria-label="Notifications">
+          <span class="icon icon-bell"></span>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="tab-panel active" id="panel-home" aria-labelledby="tab-home">
+        <section class="hero-card">
+          <div>
+            <p class="section-kicker">Career command center</p>
+            <h2>Better roles. Cleaner signals. Faster decisions.</h2>
+            <p class="section-copy">
+              UVS ACHIEVER helps candidates move through the market with sharper visibility,
+              stronger-fit roles, and less noise between interest and action.
+            </p>
+          </div>
+          <button class="hero-action" type="button" data-switch-tab="ai">Try AI Match</button>
+        </section>
+
+        <section class="stats-grid" aria-label="Platform stats">
+          <article class="stat-card">
+            <div class="stat-icon purple"><span class="icon icon-briefcase"></span></div>
+            <strong id="stat-total-jobs">0</strong>
+            <span>Total Jobs</span>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon coral"><span class="icon icon-flame"></span></div>
+            <strong id="stat-hot-jobs">0</strong>
+            <span>Hot Jobs</span>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon blue"><span class="icon icon-company"></span></div>
+            <strong id="stat-companies">0</strong>
+            <span>Companies</span>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon green"><span class="icon icon-spark"></span></div>
+            <strong id="stat-new-jobs">0</strong>
+            <span>New Today</span>
+          </article>
+        </section>
+
+        <section class="ai-banner">
+          <div class="banner-badge"><span class="icon icon-spark"></span></div>
+          <h3>AI-Powered Job Matching</h3>
+          <p>Use your skills, preferred mode, and experience level to surface stronger-fit roles.</p>
+          <button class="primary-button" type="button" data-switch-tab="ai">Open AI Match</button>
+        </section>
+
+        <section class="offer-banner">
+          <div>
+            <p class="section-kicker">Limited offer</p>
+            <h3>First 100 applicants apply free.</h3>
+            <p class="section-copy">
+              Free application slots left:
+              <strong id="offer-remaining">100</strong>.
+              After that, each application costs Rs 199.
+            </p>
+          </div>
+          <button class="primary-button" type="button" data-switch-tab="jobs">Apply now</button>
+        </section>
+
+        <section class="scanner-banner">
+          <div>
+            <p class="section-kicker">Resume scanner</p>
+            <h3>Paste your resume. Get the strongest match.</h3>
+            <p class="section-copy">
+              Drop in your resume text and UVS ACHIEVER will score it against live sample roles.
+            </p>
+          </div>
+          <button class="primary-button" type="button" data-switch-tab="scanner">Scan resume</button>
+        </section>
+
+        <section class="content-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Trending categories</p>
+              <h3>Where the hiring momentum is now.</h3>
+            </div>
+          </div>
+          <div class="category-grid" id="home-categories"></div>
+        </section>
+
+        <section class="content-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Featured roles</p>
+              <h3>Selected roles with real upside.</h3>
+            </div>
+            <button class="text-button" type="button" data-switch-tab="jobs">See all</button>
+          </div>
+          <div class="featured-jobs" id="home-featured-jobs"></div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="panel-jobs" aria-labelledby="tab-jobs" hidden>
+        <section class="content-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Jobs</p>
+              <h2>Search less. Choose better.</h2>
+            </div>
+          </div>
+
+          <div class="filter-stack">
+            <label class="field">
+              <span>Search roles</span>
+              <input type="search" id="job-search" placeholder="Frontend, AI, recruiter...">
+            </label>
+            <div class="filter-row">
+              <label class="field">
+                <span>Work mode</span>
+                <select id="mode-filter">
+                  <option value="">All modes</option>
+                  <option value="Remote">Remote</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="On-site">On-site</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Experience</span>
+                <select id="experience-filter">
+                  <option value="">All levels</option>
+                  <option value="Entry">Entry</option>
+                  <option value="Mid">Mid</option>
+                  <option value="Senior">Senior</option>
+                  <option value="Lead">Lead</option>
+                </select>
+              </label>
+            </div>
+            <div class="chip-row" id="job-category-filters" aria-label="Job categories"></div>
+          </div>
+
+          <div class="results-meta">
+            <p id="jobs-result-summary">0 roles available</p>
+            <p id="jobs-application-status">First 100 applicants apply free. Then Rs 199 per application.</p>
+          </div>
+          <div class="job-list" id="jobs-list"></div>
+          <div class="empty-state" id="jobs-empty" hidden>
+            <h3>No roles match those filters.</h3>
+            <p>Reset the search or choose a broader category.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="panel-ai" aria-labelledby="tab-ai" hidden>
+        <section class="content-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">AI Match</p>
+              <h2>Tell us what the right role looks like.</h2>
+            </div>
+          </div>
+
+          <form class="match-form" id="match-form">
+            <label class="field">
+              <span>Target role</span>
+              <select id="match-role">
+                <option value="">Any role</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Design">Design</option>
+                <option value="AI Operations">AI Operations</option>
+                <option value="Recruiting">Recruiting</option>
+                <option value="Marketing">Marketing</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Experience level</span>
+              <select id="match-experience">
+                <option value="">Any level</option>
+                <option value="Entry">Entry</option>
+                <option value="Mid">Mid</option>
+                <option value="Senior">Senior</option>
+                <option value="Lead">Lead</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Work mode</span>
+              <select id="match-mode">
+                <option value="">Any mode</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="On-site">On-site</option>
+              </select>
+            </label>
+            <label class="field full-width">
+              <span>Skills</span>
+              <input
+                type="text"
+                id="match-skills"
+                placeholder="React, hiring, analytics, prompt design..."
+              >
+            </label>
+            <button class="primary-button full-width" type="submit">Find matches</button>
+          </form>
+
+          <div class="results-meta">
+            <p id="ai-result-summary">Choose your filters to generate ranked matches.</p>
+          </div>
+          <div class="match-results" id="ai-results"></div>
+          <div class="empty-state" id="ai-empty" hidden>
+            <h3>No strong match yet.</h3>
+            <p>Try broader skills or remove one of the filters.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="panel-saved" aria-labelledby="tab-saved" hidden>
+        <section class="content-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Saved roles</p>
+              <h2>Keep your strongest options close.</h2>
+            </div>
+          </div>
+
+          <div class="job-list" id="saved-jobs-list"></div>
+          <div class="empty-state" id="saved-empty">
+            <h3>No saved jobs yet.</h3>
+            <p>Save roles from Jobs or AI Match and they will appear here.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="panel-scanner" aria-labelledby="tab-scanner" hidden>
+        <section class="content-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Resume scanner</p>
+              <h2>Scan your resume against the best-fit roles.</h2>
+            </div>
+          </div>
+
+          <form class="match-form" id="scanner-form">
+            <label class="field full-width">
+              <span>Paste resume text</span>
+              <textarea
+                id="resume-text"
+                rows="10"
+                placeholder="Paste your summary, skills, tools, projects, experience, domains..."
+              ></textarea>
+            </label>
+            <button class="primary-button full-width" type="submit">Scan for perfect match</button>
+          </form>
+
+          <div class="results-meta">
+            <p id="scanner-result-summary">Paste your resume text to score it against the current jobs.</p>
+          </div>
+
+          <div class="scanner-highlight" id="scanner-highlight" hidden>
+            <p class="section-kicker">Best match</p>
+            <div class="scanner-highlight-card" id="scanner-highlight-card"></div>
+          </div>
+
+          <div class="match-results" id="scanner-results"></div>
+          <div class="empty-state" id="scanner-empty" hidden>
+            <h3>No clear match yet.</h3>
+            <p>Add more skills, tools, and experience detail from the resume and scan again.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="panel-post" aria-labelledby="tab-post" hidden>
+        <section class="content-block">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Post a job</p>
+              <h2>Companies can request job listings here.</h2>
+            </div>
+          </div>
+
+          <form class="match-form" id="company-job-form">
+            <label class="field">
+              <span>Company name</span>
+              <input type="text" id="company-name" placeholder="Your company name" required>
+            </label>
+            <label class="field">
+              <span>Contact person</span>
+              <input type="text" id="company-contact-person" placeholder="Hiring manager or recruiter" required>
+            </label>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" id="company-email" placeholder="team@company.com" required>
+            </label>
+            <label class="field">
+              <span>Job title</span>
+              <input type="text" id="company-job-title" placeholder="Product Designer" required>
+            </label>
+            <label class="field">
+              <span>Work mode</span>
+              <select id="company-job-mode" required>
+                <option value="">Choose mode</option>
+                <option value="Remote">Remote</option>
+                <option value="Hybrid">Hybrid</option>
+                <option value="On-site">On-site</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Salary</span>
+              <input type="text" id="company-job-salary" placeholder="Rs 8L - Rs 14L" required>
+            </label>
+            <label class="field full-width">
+              <span>Job details</span>
+              <textarea id="company-job-details" rows="5" placeholder="Describe the role, skills, and expectations..." required></textarea>
+            </label>
+            <button class="primary-button full-width" type="submit">Submit job listing request</button>
+          </form>
+
+          <p class="owner-note" id="company-form-status">Company requests submitted here can be reviewed before going live.</p>
+
+          <div class="request-list-block">
+            <p class="section-kicker">Company listing requests</p>
+            <div class="request-list" id="company-request-list"></div>
+            <div class="empty-state" id="company-request-empty">
+              <h3>No company listing requests yet.</h3>
+              <p>Once a company submits the form, the request will appear here.</p>
+            </div>
+          </div>
+
+          <div class="request-list-block">
+            <p class="section-kicker">Email alerts</p>
+            <h3>Get new job alerts in your inbox.</h3>
+            <form class="match-form" id="email-alert-form">
+              <label class="field">
+                <span>Email address</span>
+                <input type="email" id="alert-email" placeholder="you@example.com" required>
+              </label>
+              <label class="field">
+                <span>Preferred category</span>
+                <select id="alert-category" required>
+                  <option value="">Choose category</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Design">Design</option>
+                  <option value="AI Operations">AI Operations</option>
+                  <option value="Recruiting">Recruiting</option>
+                  <option value="Marketing">Marketing</option>
+                </select>
+              </label>
+              <button class="primary-button full-width" type="submit">Subscribe to email alerts</button>
+            </form>
+            <p class="owner-note" id="email-alert-status">Subscribe to receive new role alerts from UVS ACHIEVER.</p>
+            <div class="request-list" id="email-alert-list"></div>
+            <div class="empty-state" id="email-alert-empty">
+              <h3>No email alert subscriptions yet.</h3>
+              <p>Subscribed candidate alerts will appear here.</p>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <p class="section-kicker">Contact us</p>
+            <h3>Reach UVS ACHIEVER directly.</h3>
+            <div class="contact-actions">
+              <a class="contact-action" href="mailto:uvsachiever@gmail.com" aria-label="Email UVS ACHIEVER">
+                <span class="icon icon-email"></span>
+                <span>Email</span>
+              </a>
+              <a
+                class="contact-action"
+                href="https://instagram.com/uv_collection_12"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open UVS ACHIEVER Instagram"
+              >
+                <span class="icon icon-instagram"></span>
+                <span>Instagram</span>
+              </a>
+            </div>
+            <p><a href="mailto:uvsachiever@gmail.com">uvsachiever@gmail.com</a></p>
+            <p><a href="https://instagram.com/uv_collection_12" target="_blank" rel="noopener noreferrer">@uv_collection_12</a></p>
+          </div>
+
+          <div class="owner-gate" id="owner-gate">
+            <label class="field">
+              <span>Owner code</span>
+              <input type="password" id="owner-code" placeholder="Enter owner access code">
+            </label>
+            <button class="primary-button" type="button" id="owner-unlock">Unlock owner panel</button>
+            <p class="owner-note" id="owner-status">Owner access is required to manage job listings.</p>
+          </div>
+
+          <div class="owner-panel" id="owner-panel" hidden>
+            <form class="match-form" id="owner-job-form">
+              <label class="field">
+                <span>Job title</span>
+                <input type="text" id="owner-title" placeholder="Senior Frontend Engineer" required>
+              </label>
+              <label class="field">
+                <span>Company</span>
+                <input type="text" id="owner-company-name" placeholder="UVS Labs" required>
+              </label>
+              <label class="field">
+                <span>Location</span>
+                <input type="text" id="owner-location" placeholder="Remote, India" required>
+              </label>
+              <label class="field">
+                <span>Salary</span>
+                <input type="text" id="owner-salary" placeholder="$90k - $120k" required>
+              </label>
+              <label class="field">
+                <span>Category</span>
+                <select id="owner-category" required>
+                  <option value="">Choose category</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Design">Design</option>
+                  <option value="AI Operations">AI Operations</option>
+                  <option value="Recruiting">Recruiting</option>
+                  <option value="Marketing">Marketing</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Experience</span>
+                <select id="owner-experience" required>
+                  <option value="">Choose level</option>
+                  <option value="Entry">Entry</option>
+                  <option value="Mid">Mid</option>
+                  <option value="Senior">Senior</option>
+                  <option value="Lead">Lead</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Work mode</span>
+                <select id="owner-mode" required>
+                  <option value="">Choose mode</option>
+                  <option value="Remote">Remote</option>
+                  <option value="Hybrid">Hybrid</option>
+                  <option value="On-site">On-site</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Skills</span>
+                <input type="text" id="owner-skills" placeholder="react, typescript, performance" required>
+              </label>
+              <label class="field full-width">
+                <span>Description</span>
+                <textarea id="owner-description" rows="5" placeholder="Write a clear job summary..." required></textarea>
+              </label>
+              <label class="field inline-toggle">
+                <span>Mark as hot job</span>
+                <input type="checkbox" id="owner-hot">
+              </label>
+              <label class="field inline-toggle">
+                <span>Mark as new today</span>
+                <input type="checkbox" id="owner-new">
+              </label>
+              <button class="primary-button full-width" type="submit">Add job listing</button>
+            </form>
+            <p class="owner-note" id="owner-form-status">New jobs added here appear instantly in the app.</p>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Primary">
+      <button class="nav-item active" id="tab-home" type="button" data-tab="home" aria-controls="panel-home" aria-pressed="true">
+        <span class="icon icon-home"></span>
+        <span>Home</span>
+      </button>
+      <button class="nav-item" id="tab-jobs" type="button" data-tab="jobs" aria-controls="panel-jobs" aria-pressed="false">
+        <span class="icon icon-briefcase"></span>
+        <span>Jobs</span>
+      </button>
+      <button class="nav-item" id="tab-ai" type="button" data-tab="ai" aria-controls="panel-ai" aria-pressed="false">
+        <span class="icon icon-spark"></span>
+        <span>AI Match</span>
+      </button>
+      <button class="nav-item" id="tab-saved" type="button" data-tab="saved" aria-controls="panel-saved" aria-pressed="false">
+        <span class="icon icon-bookmark"></span>
+        <span>Saved</span>
+      </button>
+      <button class="nav-item" id="tab-scanner" type="button" data-tab="scanner" aria-controls="panel-scanner" aria-pressed="false">
+        <span class="icon icon-scan"></span>
+        <span>Scanner</span>
+      </button>
+      <button class="nav-item" id="tab-post" type="button" data-tab="post" aria-controls="panel-post" aria-pressed="false">
+        <span class="icon icon-lock"></span>
+        <span>Post Job</span>
+      </button>
+    </nav>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <section class="footer-card">
+        <p class="section-kicker">Disclaimer</p>
+        <h3>Platform notice</h3>
+        <p>
+          UVS ACHIEVER is currently a front-end demo experience. Alerts, applications, and access
+          flows shown here are visual product flows unless connected to a live backend.
+        </p>
+      </section>
+      <section class="footer-card">
+        <p class="section-kicker">Application offer</p>
+        <h3>Current pricing rule</h3>
+        <p>
+          The first 100 applicants can apply free. After the free limit is reached, each new
+          application is charged at Rs 199.
+        </p>
+      </section>
+      <section class="footer-card">
+        <p class="section-kicker">Support</p>
+        <h3>Direct contact</h3>
+        <p>Email: <a href="mailto:uvsachiever@gmail.com">uvsachiever@gmail.com</a></p>
+        <p>Instagram: <a href="https://instagram.com/uv_collection_12" target="_blank" rel="noopener noreferrer">@uv_collection_12</a></p>
+      </section>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
