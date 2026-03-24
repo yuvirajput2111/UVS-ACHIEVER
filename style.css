@@ -724,6 +724,8 @@ textarea:focus,
 .icon-spark::before {
   clip-path: polygon(50% 0%, 62% 34%, 100% 50%, 62% 66%, 50% 100%, 38% 66%, 0% 50%, 38% 34%);
   border-radius: 0.1rem;
+  /* trigger deploy */
+  
 }
 
 [hidden] {
@@ -798,3 +800,4 @@ textarea:focus,
     animation: none !important;
   }
 }
+/* trigger deploy */
